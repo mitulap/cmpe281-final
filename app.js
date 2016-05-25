@@ -37,8 +37,7 @@ app.post('/gumball', function(req, res) {
   client.execute(createGumball,[name, value, id],{ prepare: true }, function(err, getresult){
     if(err) {
       res.json(err);
-    }
-    else {
+    } else {
       res.json({"message":"successful"});
     }
   });
@@ -49,8 +48,7 @@ app.get('/gumball/:id', function(req, res) {
   client.execute(getGumball,[id],{ prepare: true }, function(err, getresult) {
     if(err) {
       res.json(err);
-    }
-    else {
+    } else {
       res.json({rows:getresult.rows});
     }
   });
@@ -63,8 +61,7 @@ app.put('/gumball/:id', function(req, res) {
   client.execute(updateGumball,[name, value, id],{ prepare: true }, function(err, getresult) {
     if(err) {
       res.json(err);
-    }
-    else {
+    } else {
       res.json({"message":"successful"});
     }
   });
