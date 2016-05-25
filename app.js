@@ -4,6 +4,7 @@ var app = express();
 var createGumball = 'INSERT INTO gumballpractise.gumball(name, value, id) VALUES(?, ?, ?)';
 var getGumball = 'SELECT * FROM gumballpractise.gumball WHERE id=?';
 var updateGumball = 'UPDATE gumballpractise.gumball SET name=?,value=? WHERE id=?';
+var deleteProductOfUser = 'DELETE FROM gumballpractise.gumball WHERE id=?'
 const cassandra = require('cassandra-driver');
 const client=new cassandra.Client({contactPoints : ['52.27.155.165:9042']});
 /*
@@ -50,7 +51,7 @@ app.get('/gumball/:id', function(req, res) {
       res.json(err);
     } else {
       res.json({rows:getresult.rows});
-    }
+    } 
   });
 });
 
@@ -62,7 +63,19 @@ app.put('/gumball/:id', function(req, res) {
     if(err) {
       res.json(err);
     } else {
-      res.json({"message":"successful"});
+      res.json({"message":"successfully updated"});
+    }
+  });
+});
+
+app.delete('/gumball/:id', function(req, res) {
+  var id = req.params.id;
+  client.execute(deleteGumball,[id],{ prepare: true }, function(err, getresult) {
+    if(err) {
+      res.json(err);
+    }
+    else {
+      res.json({"message":"successfully deleted"});
     }
   });
 });
