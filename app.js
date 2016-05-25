@@ -4,9 +4,17 @@ var app = express();
 var createGumball = 'INSERT INTO gumballpractise.gumball(name, value, id) VALUES(?, ?, ?)';
 var getGumball = 'SELECT * FROM gumballpractise.gumball WHERE id=?';
 const cassandra = require('cassandra-driver');
-const client=new cassandra.Client({contactPoints : ['54.67.81.140:9042']});
+const client=new cassandra.Client({contactPoints : ['54.191.67.151:9042']});
 /*
+
+write "cqlsh" to open terminal
+
+CREATE KEYSPACE "name-of-the-db" WITH REPLICATION = { 'class' : 'SimpleStrategy' , 'replication_factor' :3 };
+ex..
 CREATE KEYSPACE "gumballpractise" WITH REPLICATION = { 'class' : 'SimpleStrategy' , 'replication_factor' :3 };
+use "name-of-the-db"; // to go to the db
+creating table
+CREATE TABLE "table-name"("field-name1" "type1","field-name2" "type2", ..., PRIMARY KEY("field-name2"));
 CREATE TABLE gumball(name text, value text, id int, PRIMARY KEY(id));
 */
 app.use(bodyParser.urlencoded({ extended: false }));
