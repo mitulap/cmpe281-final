@@ -6,7 +6,23 @@ var getGumball = 'SELECT * FROM gumballpractise.gumball WHERE id=?';
 var updateGumball = 'UPDATE gumballpractise.gumball SET name=?,value=? WHERE id=?';
 var deleteGumball = 'DELETE FROM gumballpractise.gumball WHERE id=?'
 const cassandra = require('cassandra-driver');
+
+
+// AWS URL
+
+/*cmpe281-instance1 
+172.31.17.230
+
+cmpe281-instance2 
+172.31.23.92
+
+cmpe281-instance3 
+172.31.30.2
+*/
+
+
 const client=new cassandra.Client({contactPoints : ['cmpe281final-506160998.us-west-2.elb.amazonaws.com:9042']});
+
 /*
 
 write "cqlsh" to open terminal
