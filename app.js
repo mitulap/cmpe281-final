@@ -4,7 +4,7 @@ var app = express();
 var createGumball = 'INSERT INTO gumballpractise.gumball(name, value, id) VALUES(?, ?, ?)';
 var getGumball = 'SELECT * FROM gumballpractise.gumball WHERE id=?';
 var updateGumball = 'UPDATE gumballpractise.gumball SET name=?,value=? WHERE id=?';
-var deleteProductOfUser = 'DELETE FROM gumballpractise.gumball WHERE id=?'
+var deleteGumball = 'DELETE FROM gumballpractise.gumball WHERE id=?'
 const cassandra = require('cassandra-driver');
 const client=new cassandra.Client({contactPoints : ['52.27.155.165:9042']});
 /*
