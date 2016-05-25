@@ -11,17 +11,20 @@ const cassandra = require('cassandra-driver');
 
 /*cmpe281-instance1 
 172.31.17.230
+52.27.155.165
 
 cmpe281-instance2 
 172.31.23.92
+52.32.153.93
 
 cmpe281-instance3 
 172.31.30.2
+52.40.51.50
 */
 
 
-const client=new cassandra.Client({contactPoints : ['52.27.155.165:9042']});
-var nodeIp = '52.27.155.165';
+const client=new cassandra.Client({contactPoints : ['52.32.153.93:9042']});
+var nodeIp = '52.32.153.93';
 /*
 
 write "cqlsh" to open terminal
