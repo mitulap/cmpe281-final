@@ -1,12 +1,11 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-var createGumball = 'INSERT INTO gumballpractise.gumball(name, value, id) VALUES(?, ?, ?)';
-var getGumball = 'SELECT * FROM gumballpractise.gumball WHERE id=?';
-var updateGumball = 'UPDATE gumballpractise.gumball SET name=?,value=? WHERE id=?';
-var deleteGumball = 'DELETE FROM gumballpractise.gumball WHERE id=?'
+var createGumball = 'INSERT INTO gumballpractise.cmpe281finaltable(value, key) VALUES(?, ?)';
+var getGumball = 'SELECT * FROM gumballpractise.cmpe281finaltable WHERE key=?';
+/*var updateGumball = 'UPDATE gumballpractise.cmpe281finaltable SET name=?,value=? WHERE id=?';
+var deleteGumball = 'DELETE FROM gumballpractise.cmpe281finaltable WHERE id=?';*/
 const cassandra = require('cassandra-driver');
-
 
 // AWS URL
 
@@ -21,8 +20,8 @@ cmpe281-instance3
 */
 
 
-const client=new cassandra.Client({contactPoints : ['cmpe281final-506160998.us-west-2.elb.amazonaws.com:9042']});
-
+const client=new cassandra.Client({contactPoints : ['172.31.17.230:9042']});
+var nodeIp = '172.31.17.230';
 /*
 
 write "cqlsh" to open terminal
@@ -36,7 +35,7 @@ use "name-of-the-db"; // to go to the db
 PRIMARY KEY(("column/s for primary keys with commma separated"), "secondary-key"));
 creating table
 CREATE TABLE "table-name"("field-name1" "type1","field-name2" "type2", ..., PRIMARY KEY("field-name2"));
-CREATE TABLE gumball(name text, value text, id int, PRIMARY KEY(id));
+CREATE TABLE cmpe281finaltable(value text, key int, PRIMARY KEY(key));
 */
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -48,21 +47,20 @@ app.use(function(req, res, next) {
 });
 
 app.post('/gumball', function(req, res) {
-  var name = req.body.name;
   var value = req.body.value;
-  var id = req.body.id;
-  client.execute(createGumball,[name, value, id],{ prepare: true }, function(err, getresult){
+  var key = req.body.key;
+  client.execute(createGumball,[value, key],{ prepare: true }, function(err, getresult){
     if(err) {
       res.json(err);
     } else {
-      res.json({"message":"successful"});
+      res.json({"message":"successfully created from node " + nodeIp});
     }
   });
 });
 
-app.get('/gumball/:id', function(req, res) {
-  var id = req.params.id;
-  client.execute(getGumball,[id],{ prepare: true }, function(err, getresult) {
+app.get('/gumball/:key', function(req, res) {
+  var key = req.params.key;
+  client.execute(getGumball,[key],{ prepare: true }, function(err, getresult) {
     if(err) {
       res.json(err);
     } else {
@@ -71,7 +69,7 @@ app.get('/gumball/:id', function(req, res) {
   });
 });
 
-app.put('/gumball/:id', function(req, res) {
+/*app.put('/gumball/:id', function(req, res) {
   var name = req.body.name;
   var value = req.body.value;
   var id = req.params.id;
@@ -95,7 +93,7 @@ app.delete('/gumball/:id', function(req, res) {
     }
   });
 });
-
+*/
 
 // app.get('*', function(req, res, next) {
 //   var err = new Error();
