@@ -64,7 +64,7 @@ app.get('/gumball/:key', function(req, res) {
     if(err) {
       res.json(err);
     } else {
-      res.json({rows:getresult.rows});
+      res.json({rows:getresult.rows, "node ip" : "" + nodeIp});
     } 
   });
 });
