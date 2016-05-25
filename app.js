@@ -3,7 +3,8 @@ var bodyParser = require('body-parser');
 var app = express();
 var createGumball = 'INSERT INTO gumballpractise.cmpe281finaltable(value, key) VALUES(?, ?)';
 var getGumball = 'SELECT * FROM gumballpractise.cmpe281finaltable WHERE key=?';
-/*var updateGumball = 'UPDATE gumballpractise.cmpe281finaltable SET name=?,value=? WHERE id=?';
+var updateGumball = 'UPDATE gumballpractise.cmpe281finaltable SET value=? WHERE key=?';
+/*
 var deleteGumball = 'DELETE FROM gumballpractise.cmpe281finaltable WHERE id=?';*/
 const cassandra = require('cassandra-driver');
 
@@ -23,8 +24,8 @@ cmpe281-instance3
 */
 
 
-const client=new cassandra.Client({contactPoints : ['52.32.153.93:9042']});
-var nodeIp = '52.32.153.93';
+const client=new cassandra.Client({contactPoints : ['52.27.155.165:9042']});
+var nodeIp = '52.27.155.165';
 /*
 
 write "cqlsh" to open terminal
@@ -72,20 +73,19 @@ app.get('/gumball/:key', function(req, res) {
   });
 });
 
-/*app.put('/gumball/:id', function(req, res) {
-  var name = req.body.name;
+app.put('/gumball/:key', function(req, res) {
   var value = req.body.value;
-  var id = req.params.id;
-  client.execute(updateGumball,[name, value, id],{ prepare: true }, function(err, getresult) {
+  var key = req.params.key;
+  client.execute(updateGumball,[value, key],{ prepare: true }, function(err, getresult) {
     if(err) {
       res.json(err);
     } else {
-      res.json({"message":"successfully updated"});
+      res.json({"message":"successfully updated from node " + nodeIp});
     }
   });
 });
 
-app.delete('/gumball/:id', function(req, res) {
+/*app.delete('/gumball/:id', function(req, res) {
   var id = req.params.id;
   client.execute(deleteGumball,[id],{ prepare: true }, function(err, getresult) {
     if(err) {
