@@ -13,6 +13,9 @@ CREATE KEYSPACE "name-of-the-db" WITH REPLICATION = { 'class' : 'SimpleStrategy'
 ex..
 CREATE KEYSPACE "gumballpractise" WITH REPLICATION = { 'class' : 'SimpleStrategy' , 'replication_factor' :3 };
 use "name-of-the-db"; // to go to the db
+
+//how to define cassandra seconddary key
+PRIMARY KEY(("column/s for primary keys with commma separated"), "secondary-key"));
 creating table
 CREATE TABLE "table-name"("field-name1" "type1","field-name2" "type2", ..., PRIMARY KEY("field-name2"));
 CREATE TABLE gumball(name text, value text, id int, PRIMARY KEY(id));
