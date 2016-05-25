@@ -1,18 +1,16 @@
 {
-  "name": "PiranhaView",
+  "name": "gumball",
   "version": "0.0.0",
-  "description": "This project contains different APIs for Piranha View",
-  "main": "server.js",
+  "description": "gumball practise",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "node app.js"
   },
-  "author": "Mitul",
+  "author": "Vishv Brahmbhatt",
   "license": "BSD-2-Clause",
   "dependencies": {
     "express": "~4.13.4",
     "body-parser": "~1.15.1",
-    "mongoose": "~4.4.17",
-    "validator": "~5.2.0"
+    "cassandra-driver": "~3.0.2"
   }
 }
