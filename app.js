@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var app = express();
 var createGumball = 'INSERT INTO gumballpractise.gumball(name, value, id) VALUES(?, ?, ?)';
 var getGumball = 'SELECT * FROM gumballpractise.gumball WHERE id=?';
+var updateGumball = 'UPDATE gumballpractise.gumball SET name=?,value=? WHERE id=?';
 const cassandra = require('cassandra-driver');
 const client=new cassandra.Client({contactPoints : ['52.27.155.165:9042']});
 /*
@@ -55,6 +56,21 @@ app.get('/gumball/:id', function(req, res) {
   });
 });
 
+app.put('/gumball/:id', function(req, res) {
+  var name = req.body.name;
+  var value = req.body.value;
+  var id = req.params.id;
+  client.execute(updateGumball,[name, value, id],{ prepare: true }, function(err, getresult) {
+    if(err) {
+      res.json(err);
+    }
+    else {
+      res.json({"message":"successful"});
+    }
+  });
+});
+
+
 // app.get('*', function(req, res, next) {
 //   var err = new Error();
 //   err.status = 404;
@@ -66,6 +82,9 @@ app.get('/gumball/:id', function(req, res) {
 //   err.status = 404;
 //   next(err);
 // });
+
+
+
 
 app.set('port', process.env.PORT || 3000);
 

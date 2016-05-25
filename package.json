@@ -7,7 +7,7 @@
     "test": "node app.js",
     "start": "node app.js"
   },
-  "author": "Vishv Brahmbhatt",
+  "author": "Mitul Patel",
   "license": "BSD-2-Clause",
   "dependencies": {
     "express": "~4.13.4",
