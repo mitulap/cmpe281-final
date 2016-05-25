@@ -24,8 +24,8 @@ cmpe281-instance3
 */
 
 
-const client=new cassandra.Client({contactPoints : ['52.27.155.165:9042']});
-var nodeIp = '52.27.155.165';
+const client=new cassandra.Client({contactPoints : ['52.32.153.93:9042']});
+var nodeIp = '52.32.153.93';
 /*
 
 write "cqlsh" to open terminal
