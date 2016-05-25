@@ -4,7 +4,7 @@ var app = express();
 var createGumball = 'INSERT INTO gumballpractise.gumball(name, value, id) VALUES(?, ?, ?)';
 var getGumball = 'SELECT * FROM gumballpractise.gumball WHERE id=?';
 const cassandra = require('cassandra-driver');
-const client=new cassandra.Client({contactPoints : ['54.191.67.151:9042']});
+const client=new cassandra.Client({contactPoints : ['52.27.155.165:9042']});
 /*
 
 write "cqlsh" to open terminal
