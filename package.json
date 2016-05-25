@@ -4,7 +4,8 @@
   "description": "gumball practise",
   "main": "app.js",
   "scripts": {
-    "test": "node app.js"
+    "test": "node app.js",
+    "start": "node app.js"
   },
   "author": "Vishv Brahmbhatt",
   "license": "BSD-2-Clause",
